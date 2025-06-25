@@ -16,7 +16,7 @@ if "start" not in st.session_state:
 # ✅ 랜딩 페이지
 # ────────────────────────────────────────────────────
 if not st.session_state.start:
-    st.set_page_config(page_title="숨은 \꿀벌 찾기", layout="centered")
+    st.set_page_config(page_title="숨은 꿀벌 찾기", layout="centered")
 
     logo = Image.open("Logo.png")
     st.image(logo, width=300)
