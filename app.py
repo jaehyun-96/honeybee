@@ -63,12 +63,11 @@ def load_data():
 if st.session_state.start:
     big_df, bee_mapping = load_data()
 
-    st.set_page_config(page_title="숨은 꿀벌 찾기", layout="wide")  # ← wide layout로 변경 (사이드바 여유 있게)
-
     st.title("🐝 장바구니 속 숨은 꿀벌 찾기")
     st.write("전 세계 식량의 90%를 차지하는 100대 농작물 중  \n70% 이상이 꿀벌의 수분 활동 덕분에 자란대요.🐝")
 
     st.sidebar.title("🔍 제품 검색")
+    st.sidebar.write(" ")  # 👉 사이드바 강제 표시용 트릭
 
     product_options = [""] + sorted(big_df["PRDLST_NM"].dropna().astype(str).unique())
     product_selected = st.sidebar.selectbox("제품명을 골라 주세요!", product_options)
