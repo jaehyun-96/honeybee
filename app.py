@@ -63,11 +63,11 @@ def load_data():
 if st.session_state.start:
     big_df, bee_mapping = load_data()
 
-    _ = st.sidebar.selectbox("dummy", [" "], label_visibility="collapsed")  # ✅ 사이드바 강제 표시
     st.sidebar.title("🔍 제품 검색")
 
     st.title("🐝 장바구니 속 숨은 꿀벌 찾기")
     st.write("전 세계 식량의 90%를 차지하는 100대 농작물 중  \n70% 이상이 꿀벌의 수분 활동 덕분에 자란대요.🐝")
+    st.markdown("🔍 **왼쪽 상단 버튼을 눌러 제품을 검색할 수 있어요!**")
 
     
     product_options = [""] + sorted(big_df["PRDLST_NM"].dropna().astype(str).unique())
