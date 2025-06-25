@@ -67,7 +67,7 @@ if st.session_state.start:
     st.write("전 세계 식량의 90%를 차지하는 100대 농작물 중  \n70% 이상이 꿀벌의 수분 활동 덕분에 자란대요.🐝")
 
     st.sidebar.title("🔍 제품 검색")
-    st.sidebar.write(" ")  # 👉 사이드바 강제 표시용 트릭
+    st.sidebar.info("📝 왼쪽 상단의 버튼을 눌러 사이드바를 펼칠 수 있어요!")
 
     product_options = [""] + sorted(big_df["PRDLST_NM"].dropna().astype(str).unique())
     product_selected = st.sidebar.selectbox("제품명을 골라 주세요!", product_options)
