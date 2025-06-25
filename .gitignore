@@ -1,0 +1,18 @@
+# Streamlit secret file
+.streamlit/secrets.toml
+
+# macOS
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Data
+merged_bee_ready.csv
+merged_bee_ready.zip
+filtered_bee_ready.csv
+filtered_bee_ready.zip
