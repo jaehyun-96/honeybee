@@ -69,7 +69,8 @@ if st.session_state.start:
     st.title("🐝 장바구니 속 숨은 꿀벌 찾기")
     st.write("전 세계 식량의 90%를 차지하는 100대 농작물 중  \n70% 이상이 꿀벌의 수분 활동 덕분에 자란대요.🐝")
 
-        product_options = [""] + sorted(big_df["PRDLST_NM"].dropna().astype(str).unique())
+    
+    product_options = [""] + sorted(big_df["PRDLST_NM"].dropna().astype(str).unique())
     product_selected = st.sidebar.selectbox("제품명을 골라 주세요!", product_options)
 
     if product_selected:
