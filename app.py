@@ -46,7 +46,7 @@ def normalize(text: str) -> str:
 # ─────────────────────────────────────────────
 def get_sheet():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"], scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gspread"], scope)
     client = gspread.authorize(creds)
     spreadsheet = client.open_by_key("1Ek70o-JPdOJ0EF7J3JxmUwca2ZaU9ZtSkODNTN_s1h4")
     return spreadsheet.worksheet("사용자 피드백")
