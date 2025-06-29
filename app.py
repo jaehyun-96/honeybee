@@ -41,7 +41,21 @@ def normalize(text: str) -> str:
     text = unicodedata.normalize("NFKC", str(text))
     text = re.sub(r"\s+", "", text)
     return text.lower()
+# ─────────────────────────────────────────────
+# ✅ 구글 시트 연동 (start 이후에도 호출 가능)
+# ─────────────────────────────────────────────
+def get_sheet():
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"], scope)
+    client = gspread.authorize(creds)
+    spreadsheet = client.open_by_key("1Ek70o-JPdOJ0EF7J3JxmUwca2ZaU9ZtSkODNTN_s1h4")
+    return spreadsheet.worksheet("사용자 피드백")
 
+def save_feedback_to_gsheet(product_name, ingredient):
+    sheet = get_sheet()
+    name = st.session_state.get("username", "익명 사용자")
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    sheet.append_row([product_name, ingredient, name, timestamp])
 # ─────────────────────────────────────────────
 # ✅ 데이터 로드 (Google Drive ZIP에서 다운로드 및 해제)
 # ─────────────────────────────────────────────
@@ -126,18 +140,3 @@ if st.session_state.start:
         st.divider()
         st.caption("🐝꿀벌은 우리가 매일 만나는 음식 뒤에 있는 특별한 친구예요. 우리 함께 꿀벌을 지켜요!🐝")
 
-# ─────────────────────────────────────────────
-# ✅ 구글 시트 연동 (start 이후에도 호출 가능)
-# ─────────────────────────────────────────────
-def get_sheet():
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"], scope)
-    client = gspread.authorize(creds)
-    spreadsheet = client.open_by_key("1Ek70o-JPdOJ0EF7J3JxmUwca2ZaU9ZtSkODNTN_s1h4")
-    return spreadsheet.worksheet("사용자 피드백")
-
-def save_feedback_to_gsheet(product_name, ingredient):
-    sheet = get_sheet()
-    name = st.session_state.get("username", "익명 사용자")
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    sheet.append_row([product_name, ingredient, name, timestamp])
